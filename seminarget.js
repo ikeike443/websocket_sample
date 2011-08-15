@@ -9,9 +9,9 @@ var http = require('https');
 
 http.get({
     host: 'demo-dev2.smartseminar.jp',
-    path: '/services/rest/authentication?api_key=245ba237fa2b4e891d91d3431edd9d08&api_sig=' + digest + '&password=fdgosbisrzaDYooj04lq',
+    path: '/services/rest/authentication?api_key=245ba237fa2b4e891d91d3431edd9d08&api_sig=' + digest + '&password=fdgosbisrzaDYooj04lq'
 }, function(res) {
-    var body = ""
+    var body = "";
     res.on('data', function(data) {
         body += data;
     });
@@ -22,7 +22,7 @@ http.get({
         console.log(token.text());
         console.log(body);
         var io = require('socket.io-client');
-        var s = io.connect('http://localhost',{port:3000,document:this});//scoket.io has bug when sending request outside from browser.
+        var s = io.connect('http://localhost:3000');//scoket.io has bug when sending request outside from browser.
         s.on('connection', function (socket) {
             socket.send(token.text());
         });
