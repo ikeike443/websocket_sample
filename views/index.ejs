@@ -3,29 +3,27 @@
     <title>hello node.js!</title>
   </head>
   <body>
-    I'm <span id="name"><%= name %></span>.<br />
-    <form onsubmit="return send();">
+    <!--I'm <span id="name"><%= name %></span>.<br />-->
+    来場通知<br />
+    <!-- <form onsubmit="return send();">
       <input type="text" name="message" id="message"/>
       <input type="submit" />
-    </form>
+    </form>-->
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
-      var mes = document.getElementById('mes');
-      if(mes){
-          return send();
-      }
       var socket = io.connect();
       socket.on('message', function(msg) {
         var div = document.createElement('div');
-        div.appendChild(document.createTextNode(msg));
+	var obj = eval("("+msg+")");
+        div.appendChild(document.createTextNode(obj.myname));
         document.body.appendChild(div);
       });
-      function send() {
+      /*function send() {
         var message = document.getElementById('message');
         socket.send(document.getElementById('name').innerText + ': ' + message.value);
         message.value = '';
         return false;
-      }
+      }*/
     </script>
   </body>
 </html>
